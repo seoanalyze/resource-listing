@@ -100,6 +100,22 @@ class ResourceListing extends Card
         ]);
     }
 
+
+    /**
+     * @param $readableDate
+     * @return $this
+     */
+    public function addRow($rowname) {
+        return $this->withMeta([
+            'addRow' => $rowname
+        ]);
+    }
+    public function belongsTo($model) {
+        return $this->withMeta([
+            'belongsTo' => $model
+        ]);
+    }
+
     /**
      * Get the component name for the element.
      *
@@ -109,4 +125,6 @@ class ResourceListing extends Card
     {
         return 'resource-listing';
     }
+
+    
 }

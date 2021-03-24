@@ -271,6 +271,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['card'],
@@ -295,7 +297,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'resourceTitleColumn': this.card.resourceTitleColumn,
             'readableDate': this.card.readableDate,
             'column': this.card.column,
-            'value': this.card.value
+            'value': this.card.value,
+            'addRow': this.card.addRow,
+            'belongsTo': this.card.belongsTo
         })).then(function (response) {
             _this.items = response.data;
             _this.loading = false;
@@ -371,6 +375,17 @@ var render = function() {
                             ],
                             1
                           ),
+                          _vm._v(" "),
+                          _vm.card.addRow
+                            ? _c(
+                                "td",
+                                {
+                                  staticClass:
+                                    "text-sm p-2 text-left border-t border-r border-b border-50"
+                                },
+                                [_vm._v(_vm._s(item.addRow))]
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "td",

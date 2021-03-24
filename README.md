@@ -1,4 +1,4 @@
-This package allows you to list resources and order them based on a specific column. I've added a filter function to this fork.
+This package allows you to list resources and order them based on a specific column. I've added a filter function and an option to display a third row (+ you can display data from a related model too) to this fork.
 
 # Installation
 You can install the package in a Laravel app with Nova installed
@@ -42,6 +42,19 @@ protected function cards()
 | readableDate | sets the readable human date flag. this can be used with any date column | `true` - `false` | `false` |
 
 # Advanced Examples
+ - Display recently updated posts, link each post to its resource url, show only posts of current user, show a project name and limit the results to 5
+
+```php
+(new ResourceListing())  
+ ->cardTitle('Recently Updated Posts')  
+ ->resource(\App\TOYIT\Posts\Post::class)  
+ ->resourceUrl('/resources/posts/') 
+ ->belongsTo('project')
+ ->addRow('name')
+ ->orderBy('updated_at')
+ ->filter('user_id', auth()->id()) 
+ ->limit(5)
+```
 
  - Display recently updated posts, link each post to its resource url, show only posts of current user
    and limit the results to 5

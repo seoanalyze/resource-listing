@@ -17,9 +17,11 @@
                                 </router-link>
                                 <p class="text-sm dim" v-else>{{ item.title }}</p>
                             </td>
+                            <td v-if="card.addRow" class="text-sm p-2 text-left border-t border-r border-b border-50">{{ item.addRow }}</td>
                             <td class="text-sm p-2 text-right border-t border-r border-b border-50">
                                 {{ item.ordered_column }}
                             </td>
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -54,7 +56,9 @@
                     'resourceTitleColumn': this.card.resourceTitleColumn,
                     'readableDate': this.card.readableDate,
                     'column': this.card.column,
-                    'value': this.card.value
+                    'value': this.card.value,
+                    'addRow': this.card.addRow,
+                    'belongsTo': this.card.belongsTo,
                 }))
                 .then(response => {
                     this.items = response.data;

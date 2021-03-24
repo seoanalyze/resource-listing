@@ -29,19 +29,32 @@ Route::post('/fetch', function () {
     $resourceTitleColumn = request()->json('resourceTitleColumn', 'title');
     $column = request()->json('column');
     $value = request()->json('value');
+    $addRow = request()->json('addRow');
+    $query = $resource::orderBy($orderBy, $order);
+    $belongsTo = request()->json('belongsTo');
 
-    if($column==''){
-        $items = $resource::orderBy($orderBy, $order)->take($limit)->get();
+    if($column!=''){
+       $query = $query->where($column, $value);
     }
-    else{
-        $items = $resource::orderBy($orderBy, $order)->where($column, $value)->take($limit)->get();
+    if(isset($belongsTo) && $belongsTo!=""){
+        $query = $query->with($belongsTo);
     }
+
+    $items = $query->with('customer')->take($limit)->get();
     
 
 
-    $items->map(function ($item) use ($resourceTitleColumn, $orderBy) {
+    $items->map(function ($item) use ($resourceTitleColumn, $orderBy, $addRow, $belongsTo) {
         $item->makeVisible('id');
         $item->title = $item->{$resourceTitleColumn};
+        if(isset($belongsTo) && $belongsTo!="" && $addRow!=""){
+            $item->addRow = $item->{$belongsTo}->{$addRow};
+        }
+        else if($addRow!=""){
+            $item->addRow = $item->{$addRow};
+        }
+
+        
         $item->ordered_column = request()->json('readableDate', false) ? \Carbon\Carbon::parse($item->{$orderBy})->diffForHumans() : $item->{$orderBy};
     });
 
