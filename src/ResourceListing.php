@@ -83,6 +83,13 @@ class ResourceListing extends Card
         ]);
     }
 
+    public function filter($column = '', $value = ''){
+        return $this->withMeta([
+            'column' => $column,
+            'value' => $value,
+        ]);
+    }
+
     /**
      * @param $readableDate
      * @return $this

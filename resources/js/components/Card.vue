@@ -52,7 +52,9 @@
                     'order': this.card.order,
                     'limit': this.card.limit,
                     'resourceTitleColumn': this.card.resourceTitleColumn,
-                    'readableDate': this.card.readableDate
+                    'readableDate': this.card.readableDate,
+                    'column': this.card.column,
+                    'value': this.card.value
                 }))
                 .then(response => {
                     this.items = response.data;

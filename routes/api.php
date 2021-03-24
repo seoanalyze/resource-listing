@@ -27,8 +27,17 @@ Route::post('/fetch', function () {
     $order = request()->json('order', 'desc');
     $limit = request()->json('limit', 10);
     $resourceTitleColumn = request()->json('resourceTitleColumn', 'title');
+    $column = request()->json('column');
+    $value = request()->json('value');
 
-    $items = $resource::orderBy($orderBy, $order)->take($limit)->get();
+    if($column==''){
+        $items = $resource::orderBy($orderBy, $order)->take($limit)->get();
+    }
+    else{
+        $items = $resource::orderBy($orderBy, $order)->where($column, $value)->take($limit)->get();
+    }
+    
+
 
     $items->map(function ($item) use ($resourceTitleColumn, $orderBy) {
         $item->makeVisible('id');
