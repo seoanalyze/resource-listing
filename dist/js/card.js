@@ -293,7 +293,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'order': this.card.order,
             'limit': this.card.limit,
             'resourceTitleColumn': this.card.resourceTitleColumn,
-            'readableDate': this.card.readableDate
+            'readableDate': this.card.readableDate,
+            'column': this.card.column,
+            'value': this.card.value
         })).then(function (response) {
             _this.items = response.data;
             _this.loading = false;
